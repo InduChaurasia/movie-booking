@@ -4,6 +4,7 @@ import LatestMovies from './components/LatestMovies';
 import UpcomingMovies from './components/UpcomingMovies';
 import NearByEvents from './components/NearByEvents';
 import MovieDetails from './components/MovieDetails';
+import BookMovie from './components/BookMovie';
 import Page404 from './components/Page404';
 import NavigationMenu from './components/NavigationMenu';
 
@@ -18,6 +19,7 @@ let App = () => (
                 <Route  path="/movies/upcoming"  component={UpcomingMovies}/>
                 <Route  path="/events" component={NearByEvents}/>
                 <Route  path="/details/:movieId" component={MovieDetails} />
+                <Route  path="/book/:movieId/:movieName" component={BookMovie} />
                 <Route component={Page404} />
               </Switch>
             </div>

@@ -1,4 +1,4 @@
-import { put, takeLatest, all, take, fork } from "redux-saga/effects";
+import { put, takeLatest, all } from "redux-saga/effects";
 
 function* fetchLatestMovies() {
   console.log("fetchLatestMovies");

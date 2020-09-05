@@ -17,20 +17,11 @@ function MovieDetails(props) {
         <div className="row">
           <h3 className="col-sm-12 card-title text-center">Movie Details</h3>
         </div>
-        <hr/>
+        <hr />
         <div className="row">
+
           <div className="col-sm-2"></div>
-          <div className="col-sm-3">
-            <div className="card">
-              <img
-                className="card-img-top"
-                src={props.movie.imageUrl}
-                height="300"
-                width="100"
-              />
-            </div>
-          </div>
-          <div className="col-sm-1"></div>
+
           <div className="col-sm-4">
             <div className="card">
               <div className="card-block">
@@ -41,8 +32,22 @@ function MovieDetails(props) {
                 {props.movie.type} <br /> Rating : {props.movie.rate}
               </p>
             </div>
-            <div className="col-sm-3"></div>
           </div>
+
+          <div className="col-sm-1"></div>
+
+          <div className="col-sm-3">
+            <div className="card">
+              <img
+                className="card-img-top"
+                src={props.movie.imageUrl}
+                height="300"
+                width="100"
+              />
+            </div>
+          </div>
+          
+          <div className="col-sm-3"></div>
         </div>
       </>
     );

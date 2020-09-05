@@ -9,7 +9,15 @@ function UpcomingMovies(props) {
     props.getUpcomingMovies();
   }, []);
 
-  return <ListMovies movieList={props.movies} movieType="upcoming movies" />;
+  return (
+    <>
+      <div className="row">
+        <h3 className="col-sm-12 card-title text-center">Upcoming Movies</h3>
+      </div>
+      <hr />
+      <ListMovies movieList={props.movies} movieType="upcoming movies" />{" "}
+    </>
+  );
 }
 
 const mapStateToProps = (state) => ({ movies: state.upcomingMovieList });

@@ -9,7 +9,15 @@ function LatestMovies(props) {
     props.getLatestMovies();
   }, []);
 
-  return <ListMovies movieList={props.movies} movieType="latest movies" />;
+  return (
+    <>
+      <div className="row">
+        <h3 className="col-sm-12 card-title text-center">Latest Movies</h3>
+      </div>
+      <hr />
+      <ListMovies movieList={props.movies} movieType="latest movies" />{" "}
+    </>
+  );
 }
 
 const mapDispatchToProps = { getLatestMovies };
