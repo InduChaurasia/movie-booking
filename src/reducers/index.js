@@ -7,9 +7,12 @@ const reducer = (state = {}, action) => {
       case 'NEARBY_EVENTS_RECEIVED' :
           return {...state, nearbyEvents: action.events}     
       case 'MOVIE_DETAILS_RECEIVED' :
-          return {...state, movieDetail: action.detail}     
+          return {...state, movieDetail: action.detail}   
+      case 'SET_BOOKING_DETAILS' :
+          return {...state, bookedTicket:action.payload} 
       default: 
            return state;
     }
+
    };
    export default reducer;

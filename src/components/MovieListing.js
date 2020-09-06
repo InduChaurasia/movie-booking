@@ -8,29 +8,18 @@ const ListMovies = (props) => {
   };
 
   const createMovieCard = (props, movie, index) => {
-    if (props.movieType != "latest movies") {
+   
       return (
         <>
-          <Link key={index} to={`/details/${movie._id}`}>
-            <div className="card" key={index}>
-              <img className="card-img-top" src={movie.imageUrl} />
-            </div>
-          </Link>
-        </>
-      );
-    } else {
-      return (
-        <>
-          <Link key={index} to={`/details/${movie._id}`}>
+          <Link key={index} to={`/details/${movie._id}/${props.movieType}`}>
             <div className="card" key={index}>
               <img className="card-img-top" src={movie.imageUrl} /> <br/>
-              <Link className="btn btn-primary" to={`/book/${movie._id}/${movie.name}`}>Book Now</Link>
-            </div>
-            
+              {props.movieType == "latest movies" && <Link className="btn btn-primary" to={`/book/${movie._id}`}>Book Now</Link>}
+            </div>            
           </Link>
         </>
       );
-    }
+    
   };
 
   const createEmptyItems = (props) => {

@@ -1,72 +1,109 @@
-import React, { useState } from "react";
-import { connect } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { Redirect } from "react-router-dom";
+import { setBookingDetails } from "../actions";
+import { Form, Button } from "react-bootstrap";
 
 function BookMovie(props) {
-  let [movieId] = useState(props.match.params.movieId);
-  let [movieName] = useState(props.match.params.movieName);
+  let movieId = props.match.params.movieId;
   let [bookingDate, setBookingDate] = useState();
-  let [showTiming, setShowTiming] = useState();
+  let [showTiming, setShowTiming] = useState("10:30AM");
   let [noOfSeats, setNoOfSeats] = useState();
   let [isBooked, setBooked] = useState(false);
+  let bookingDatails;
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    bookingDatails = {
+      bookingDate: bookingDate,
+      showTiming: showTiming,
+      noOfSeats: noOfSeats,
+    };
+    dispatch(setBookingDetails(bookingDatails));
+  }, [isBooked]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setBooked(true);    
-    console.log("handle submit ..." );
-    console.log("booked ..." + isBooked);
-    console.log("movieid : "+movieId);
-    console.log("movieName : "+movieName);
+    setBooked(true);
   };
 
-  const getBookingForm = () =>{
- 
-    return( <>
+  const getBookingForm = () => {
+    if (isBooked) {
+      return <Redirect to={`/confirmation/${movieId}`} />;
+    }
+    return (
+      <>
         <div className="row">
           <h3 className="col-sm-12 card-title text-center">Latest Movies</h3>
         </div>
         <hr />
-        <form onSubmit={(event)=>handleSubmit(event)} className="col-lg-6 offset-lg-3">
-          <div className="justify-content-center">
-            <label>
-              Booking Date :&nbsp;
-              <input type="date" value={bookingDate} onChange={(event) => setBookingDate(event.value)} />
-            </label>
-            <br />
-            <label>
-              Show Timing :&nbsp;
-              <select value={showTiming} onChange={(event) => setShowTiming(event.value)}>
-                <option value="10:30AM">10:30AM</option>
-                <option value="2:30PM">2:30PM</option>
-                <option value="6:30PM">6:30PM</option>
-                <option value="10:30PM">10:30Pm</option>
-              </select>
-            </label>
-            <br />
-            <label>
-              No Of Seats :&nbsp;
-              <input type="text" value={noOfSeats} onChange={(event) => setNoOfSeats(event.value)}/>
-            </label>
-            <br />
-            <input type="submit" value="Book Ticket" />
-          </div>
-        </form>
-      </>);
+        <Form
+          onSubmit={(event) => handleSubmit(event)}
+          className="col-lg-6 offset-lg-3"
+        >
+          <Form.Group controlId="bookingDate">
+            <Form.Label>Booking Date</Form.Label>
+            <Form.Control
+              type="date"
+              defaultValue="Mark"
+              required
+              value={bookingDate}
+              onChange={(event) => setBookingDate(event.target.value)}
+            />
+          </Form.Group>
+          <Form.Group controlId="showTiming">
+            <Form.Label> Show Timing</Form.Label>
+            <Form.Control
+              defaultValue="Mark"
+              required
+              as="select" defaultValue="10:30AM"
+              value={showTiming}
+              onChange={(event) => setShowTiming(event.target.value)}
+            >
+             
+              <option value="10:30AM">10:30AM</option>
+              <option value="2:30PM">2:30PM</option>
+              <option value="6:30PM">6:30PM</option>
+              <option value="10:30PM">10:30Pm</option>
+            </Form.Control>
+          </Form.Group>
+          <Form.Group controlId="noOfSeats">
+            <Form.Label> No Of Seats</Form.Label>
+            <Form.Control
+              type="number"
+              defaultValue="Mark"
+              required
+              value={noOfSeats}
+              onChange={(event) => setNoOfSeats(event.target.value)}
+            />
+          </Form.Group>
+          <Button variant="primary" type="submit">
+            Book Ticket
+          </Button>
+        </Form>
+      </>
+    );
+  };
 
-
-  }
-
+  const getConfirmationPage = () => {
+    return (
+      <>
+        <div> booked ........</div>
+      </>
+    );
+  };
 
   return getBookingForm();
 }
 
-const mapStateToProps = (state) => ({
-  movieId: state.movieId,
-  bookingDate: state.bookingDate,
-  showTiming: state.showTiming,
-  noOfSeats: state.noOfSeats,
-  isBooked: state.isBooked
-});
+// const mapStateToProps = (state) => ({
+//   movieId: state.movieId,
+//   bookingDate: state.bookingDate,
+//   showTiming: state.showTiming,
+//   noOfSeats: state.noOfSeats,
+//   isBooked: state.isBooked,
+// });
 
-BookMovie = connect(mapStateToProps)(BookMovie);
+// BookMovie = connect(mapStateToProps)(BookMovie);
 
 export default BookMovie;

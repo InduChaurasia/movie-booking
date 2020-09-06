@@ -5,8 +5,10 @@ import UpcomingMovies from './components/UpcomingMovies';
 import NearByEvents from './components/NearByEvents';
 import MovieDetails from './components/MovieDetails';
 import BookMovie from './components/BookMovie';
+import BookingConfirmation from './components/BookingConfirmation';
 import Page404 from './components/Page404';
 import NavigationMenu from './components/NavigationMenu';
+
 
 let App = () => (
   <div className="App">
@@ -18,8 +20,9 @@ let App = () => (
                 <Route  path="/movies/latest" component={LatestMovies} />
                 <Route  path="/movies/upcoming"  component={UpcomingMovies}/>
                 <Route  path="/events" component={NearByEvents}/>
-                <Route  path="/details/:movieId" component={MovieDetails} />
-                <Route  path="/book/:movieId/:movieName" component={BookMovie} />
+                <Route  path="/details/:movieId/:movieType" component={MovieDetails} />
+                <Route  path="/book/:movieId" component={BookMovie} />
+                <Route path="/confirmation/:movieId" component={BookingConfirmation}/>
                 <Route component={Page404} />
               </Switch>
             </div>

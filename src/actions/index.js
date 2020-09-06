@@ -15,3 +15,8 @@ export const getNearbyEvenat = () => ({
     type: 'GET_NEARBY_EVENTS'
 });
 
+export const setBookingDetails = (payload) =>({
+    type: 'SET_BOOKING_DETAILS',
+    payload
+});
+

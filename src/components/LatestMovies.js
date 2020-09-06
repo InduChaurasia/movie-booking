@@ -1,12 +1,15 @@
-import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
+import React, { useEffect } from "react";
+import { useSelector,useDispatch} from "react-redux";
 import { getLatestMovies } from "../actions";
 import ListMovies from "./MovieListing";
 
-function LatestMovies(props) {
-  let [movies] = useState([]);
+
+function LatestMovies() {
+  const movies = useSelector(state=> state.latestMovieList);
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    props.getLatestMovies();
+   dispatch(getLatestMovies())
   }, []);
 
   return (
@@ -15,13 +18,13 @@ function LatestMovies(props) {
         <h3 className="col-sm-12 card-title text-center">Latest Movies</h3>
       </div>
       <hr />
-      <ListMovies movieList={props.movies} movieType="latest movies" />{" "}
+      <ListMovies movieList={movies} movieType="latest movies" />
     </>
   );
 }
 
-const mapDispatchToProps = { getLatestMovies };
-const mapStateToProps = (state) => ({ movies: state.latestMovieList });
-LatestMovies = connect(mapStateToProps, mapDispatchToProps)(LatestMovies);
+// const mapDispatchToProps = { getLatestMovies };
+// const mapStateToProps = (state) => ({ movies: state.latestMovieList });
+// LatestMovies = connect(mapStateToProps, mapDispatchToProps)(LatestMovies);
 
 export default LatestMovies;
